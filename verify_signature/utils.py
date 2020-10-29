@@ -8,6 +8,8 @@ from django.conf import settings
 from sklearn.externals import joblib
 import keras.backend.tensorflow_backend
 import tensorflow as tf
+import os 
+os.environ['THEANO_FLAGS'] = 'optimizer=None'
 import numpy as np
 from imageio import imread, imsave
 from .preprocess.normalize import remove_background, remove_background1
