@@ -18,6 +18,7 @@
                 font-size: 36pt;
                 text-decoration: none;
             }
+
             .center {
             margin: 0;
             position: absolute;
@@ -26,7 +27,7 @@
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
             }
-            
+                        
         </style>
     </head>
     <body>
@@ -41,11 +42,11 @@
        
         <input type="file" id="file1" name="image" accept="image/*" capture style="display:none"/>
             <div class="container">
-            <div class="center">
-                <img src={% static 'Button.png' %} id="upfile1" style="cursor:pointer"/>
+                <div class="center">
+                <img src={% static 'Button.png' %} id="upfile1" style="cursor:pointer" >
                 <br>
                 <br>
-                <b>Result:</b>
+                <b>Output:</b>
                 <div> 
                     <strong> 
                         <span id = "result">
@@ -57,8 +58,9 @@
                 <div id='loadingmessage' style='display:none'>
                     <img src={% static 'loading.gif' %}/>
                 </div>
+                </div>
             </div>
-            </div>
+            
         <input id="selectfile" type="file" name="" style="display: none;" /> 
         
     </body>
@@ -102,10 +104,19 @@
         };
 
         $.ajax(settings).done(function (response) {
-                console.log(response)
-                var obj = JSON.parse(response)
-                $('#result').replaceWith('<span id = "result">'+ obj.Difference + '</span>');
+                var obj = JSON.parse(response);
                 $('#loadingmessage').hide();	
+                if(obj.status==200){
+                    $('#result').replaceWith('<span id = "result">'+ "Account Number: "+obj.Account_Number+'<br>'+
+                        "Difference between the signature in the database and signature in the slip is "+obj.Difference +'<br>'+'Verdict: '+obj.Verdict+ '</span>');
+                }
+                else if(obj.status==404){
+                    $('#result').replaceWith('<span id = "result">'+ "Account Number does exsist" + '</span>');
+                }
+                else{
+                    $('#result').replaceWith('<span id = "result">'+ "Internal Server Error has occurred" + '</span>');
+                }
+
 
         });
     };

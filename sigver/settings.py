@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'a#@cm*%dvfnyd!o4i8tagj)^68x^5vpx)raey12(&a2v7@^vbz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = [ '*' ]
 
 
 # Application definition
@@ -122,4 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'Media')
 MEDIA_URL = '/Media/'
-STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'verify_signature/static')

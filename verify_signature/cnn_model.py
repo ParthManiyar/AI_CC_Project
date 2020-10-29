@@ -1,5 +1,7 @@
 from six.moves import cPickle
 import lasagne
+import os 
+os.environ['THEANO_FLAGS'] = 'optimizer=None'  
 import theano
 from theano import tensor as T
 import numpy as np

@@ -20,7 +20,6 @@ Threshold = 30
 class CsrfExemptSessionAuthentication(SessionAuthentication):
     def enforce_csrf(self, request):
         return
-
 # LOGGER
 
 def error():
@@ -31,6 +30,8 @@ def error():
 
 def Home(request):
     return render(request,'sigver/base.html')
+
+
 
 class Signature_VerficationAPI(APIView):
     authentication_classes = (CsrfExemptSessionAuthentication,BasicAuthentication)
@@ -49,11 +50,11 @@ class Signature_VerficationAPI(APIView):
                 response['Account_Number']=acc_num
                 response['Difference']=dist
                 if(dist>Threshold):
-                    response['Result']="Rejected"
+                    response['Verdict']="Rejected"
                 else:
-                    response['Result']="Accepted"
+                    response['Verdict']="Accepted"
             else:
-                response["status"]=400
+                response["status"]=404
             
         except Exception as e:
             error()
