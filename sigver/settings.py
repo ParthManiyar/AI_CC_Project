@@ -56,7 +56,7 @@ ROOT_URLCONF = 'sigver.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'verify_signature/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
