@@ -56,7 +56,7 @@
                 </div>
                 <br>
                 <div id='loadingmessage' style='display:none'>
-                    <img src={% static 'loading.gif' %}>
+                    <img src={% static 'loading.gif' %} >
                 </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                         "Difference between the signature in the database and signature in the slip is "+obj.Difference +'<br>'+'Verdict: '+obj.Verdict+ '</span>');
                 }
                 else if(obj.status==404){
-                    $('#result').replaceWith('<span id = "result">'+ "Account Number does exsist" + '</span>');
+                    $('#result').replaceWith('<span id = "result">'+ "Account Number does not exsist" + '</span>');
                 }
                 else{
                     $('#result').replaceWith('<span id = "result">'+ "Internal Server Error has occurred" + '</span>');

@@ -4,7 +4,7 @@ from .models import Slip
 from django.contrib.auth.models import Group
 
 class Slip_Admin(admin.ModelAdmin):
-    list_display=('Account_Number','image_tag',)
+    list_display=('Account_Number','Signature',)
     search_fields=('Account_Number',)
     
 

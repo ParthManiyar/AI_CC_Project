@@ -16,7 +16,7 @@ class Slip(models.Model):
     def __str__(self):
         return self.Account_Number
 
-    def image_tag(self):
+    def Signature(self):
         return mark_safe('<a href="/Media/{}"><img src="/Media/{}" width="100" height="50" /></a>'.format((self.Image_Path ),(self.Image_Path)))
 
 

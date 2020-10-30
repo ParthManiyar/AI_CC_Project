@@ -1,0 +1,199 @@
+{% load staticfiles %}
+
+<html lang="en">
+    <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+            .container { 
+            height: 400px;
+            position: relative;
+            }
+            .page-header {
+                background-color: #C25100;
+                margin-top: 0;
+                padding: 10px 10px 10px 20px;
+            }
+
+            .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+                color: #ffffff;
+                font-size: 36pt;
+                text-decoration: none;
+            }
+
+            #output_image_Signature_2:hover{
+	            transform: scale(2);
+            }
+            #output_image_Signature:hover{
+	            transform: scale(2);
+            }
+            .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 47%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            }
+                        
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <div class="page-header">
+            <button onclick="location.href = '/admin/verify_signature/slip'" style="float:right">To Search a Slip</button>
+
+            <h1 align="center">Signature Verfication</h1>
+                        
+        </div>
+       
+        <input type="file" id="file1" name="image" accept="image/*" capture style="display:none"/>
+        <input type="file" id="file2" name="image" accept="image/*" capture style="display:none"/>
+            <div class="container">
+                <div class="center">
+                    <div style="float:left;">
+                        <img src={% static 'Button3.png' %} id="upfile1" style="cursor:pointer" >
+                        <br>
+                        <br>
+                        <b>Output:</b>
+                        <div > 
+                            <strong> 
+                                <span id = "result">
+                
+                                </span> 
+                            </strong>
+                        </div>
+                        <br>
+                        <div id='loadingmessage' style='display:none'>
+                            <img src={% static 'loading.gif' %} >
+                        </div>
+                    </div>
+                    
+                    <div style="float:left;">
+                        <img src={% static 'Button2.png' %} id="upfile2" style="cursor:pointer" >
+                    </div>
+
+                </div>
+            </div>
+            <input id="selectfile" type="file" name="" style="display: none;" /> 
+            <input id="selectfile1" type="file" name="" style="display: none;" /> 
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6"><div style="float:left; width: 40%;"> Reference Signature Used:<br>	<img id="output_image_Signature_2" width="250" height="100"/>  <br>
+                </div> </div>
+                <div class="col-sm-4"> <div style="float:left; width: 40%;"> Slip Signature:<br> <img id="output_image_Signature" width="250" height="100"/>  <br>
+                </div>  </div>
+              </div>
+             
+             
+    </body>
+</html>
+
+              
+				
+
+<script type="text/javascript" >
+    $(document).ready(function(e) {
+        $(".showonhover").click(function(){
+            $("#selectfile").trigger('click');
+        });
+    });
+
+    $(document).ready(function(e) {
+        $(".showonhover").click(function(){
+            $("#selectfile1").trigger('click');
+        });
+    });
+    
+    $("#upfile1").click(function () {
+        $("#file1").trigger('click');
+    });
+
+    
+    $("#upfile2").click(function () {
+        $("#file2").trigger('click');
+    });
+    var input = document.querySelector('input[id=file1]'); 
+    var input2 = document.querySelector('input[id=file2]'); 
+    input.onchange = function () {
+      $('#result').replaceWith('<span id = "result">'+ '' + '</span>');
+      $('#loadingmessage').show();	
+      var file = input.files[0];
+      var form = new FormData();
+        
+        form.append("Image",file);
+
+        var settings = {
+        "url": "/Signature_Verification/",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+                var obj = JSON.parse(response);
+                $('#loadingmessage').hide();	
+                if(obj.status==200){
+                    $('#result').replaceWith('<span id = "result">'+ "Account Number: "+obj.Account_Number+'<br>'+
+                        "Difference between the signature in the database and signature in the slip is "+obj.Difference +'<br>'+'Verdict: '+obj.Verdict+ '</span>');
+                    document.getElementById('output_image_Signature_2').src = obj.sign1
+                    document.getElementById('output_image_Signature').src = obj.sign2
+                }
+                else if(obj.status==404){
+                    $('#result').replaceWith('<span id = "result">'+ "Slip with Account Number "+obj.Account_Number+" does not exsist" + '</span>');
+                }
+                else{
+                    $('#result').replaceWith('<span id = "result">'+ "Internal Server Error has occurred" + '</span>');
+                }
+
+
+        });
+    };
+
+    input2.onchange = function () {
+      $('#result').replaceWith('<span id = "result">'+ '' + '</span>');
+      $('#loadingmessage').show();	
+      var file = input2.files[0];
+      var form = new FormData();
+        
+        form.append("Image",file);
+
+        var settings = {
+        "url": "/Add_Signature/",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+                var obj = JSON.parse(response);
+                $('#loadingmessage').hide();	
+                if(obj.status==201){
+                    $('#result').replaceWith('<span id = "result">'+ "Slip with Account Number: "+obj.Account_Number+' is successfully added in database </span>');
+                    document.getElementById('output_image_Signature_2').src = obj.sign1
+                }
+                else if(obj.status==409){
+                    $('#result').replaceWith('<span id = "result">'+ "Slip with Account Number "+obj.Account_Number+" already exsist in database" + '</span>');
+                }
+                else{
+                    $('#result').replaceWith('<span id = "result">'+ "Internal Server Error has occurred" + '</span>');
+                }
+
+
+        });
+    };
+    
+    
+    
+    
+    
+</script>
+ 
