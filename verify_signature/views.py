@@ -149,7 +149,7 @@ class Add_SignatureAPI(APIView):
                 img = Image.fromarray(sign2)
                 img_path = os.path.join(settings.MEDIA_ROOT, 'image/'+acc_num+'.jpg')
                 img.save(img_path)
-                sp.Image_Path = img_path
+                sp.Image_Path = 'image/'+acc_num+'.jpg'
                 sp.save()
                 response['status']=201
                 response['Account_Number']=acc_num
