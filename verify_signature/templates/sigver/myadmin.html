@@ -45,7 +45,7 @@
         <div class="page-header">
             <button onclick="location.href = '/admin/verify_signature/slip'" style="float:right">To Search a Slip</button>
 
-            <h1 align="center">Signature Verfication</h1>
+            <h1 align="center">Signature Verification</h1>
                         
         </div>
        
@@ -53,11 +53,17 @@
         <input type="file" id="file2" name="image" accept="image/*" capture style="display:none"/>
             <div class="container">
                 <div class="center">
-                    <div style="float:left;">
+                    <div >
                         <img src={% static 'Button3.png' %} id="upfile1" style="cursor:pointer" >
-                        <br>
-                        <br>
-                        <b>Output:</b>
+                    </div>
+                        
+                    
+                    <div>
+                        <img src={% static 'Button2.png' %} id="upfile2" style="cursor:pointer" >
+                    </div>
+                    <br>
+                    <br>
+                    <b>Output:</b>
                         <div > 
                             <strong> 
                                 <span id = "result">
@@ -69,10 +75,6 @@
                         <div id='loadingmessage' style='display:none'>
                             <img src={% static 'loading.gif' %} >
                         </div>
-                    </div>
-                    
-                    <div style="float:left;">
-                        <img src={% static 'Button2.png' %} id="upfile2" style="cursor:pointer" >
                     </div>
 
                 </div>

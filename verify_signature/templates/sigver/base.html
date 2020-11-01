@@ -36,7 +36,7 @@
         <div class="page-header">
             <button onclick="location.href = '/admin/verify_signature/slip'" style="float:right">Admin Login</button>
 
-            <h1 align="center">Signature Verfication</h1>
+            <h1 align="center">Signature Verification</h1>
                         
         </div>
        
@@ -104,8 +104,7 @@
                 var obj = JSON.parse(response);
                 $('#loadingmessage').hide();	
                 if(obj.status==200){
-                    $('#result').replaceWith('<span id = "result">'+ "Account Number: "+obj.Account_Number+'<br>'+
-                        "Difference between the signature in the database and signature in the slip is "+obj.Difference +'<br>'+'Verdict: '+obj.Verdict+ '</span>');
+                    $('#result').replaceWith('<span id = "result">'+ "Account Number: "+obj.Account_Number+'<br>'+'Verdict: '+obj.Verdict+ '</span>');
                 }
                 else if(obj.status==404){
                     $('#result').replaceWith('<span id = "result">'+ "Account Number does not exsist" + '</span>');

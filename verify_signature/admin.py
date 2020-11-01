@@ -6,11 +6,20 @@ from django.contrib.auth.models import Group
 class Slip_Admin(admin.ModelAdmin):
     list_display=('Account_Number','Signature',)
     search_fields=('Account_Number',)
-    
 
     def changelist_view(self, request, extra_context=None):
         extra_context = {'title': 'Add,Update or Delete Record'}
         return super(Slip_Admin, self).changelist_view(request, extra_context=extra_context)
+    
+    def __init__(self, *args, **kwargs):
+        super(Slip_Admin, self).__init__(*args, **kwargs)
+        self.list_display_links = None
+    
+    def has_add_permission(self, request, obj=None):
+        return False
+    
+
+    
 
 admin.site.register(Slip,Slip_Admin)
 admin.site.unregister(Group)

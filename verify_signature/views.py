@@ -17,7 +17,7 @@ from PIL import Image
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 import traceback
-Threshold = 30
+Threshold = 25
 # CLASSES BELOW
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
