@@ -14,5 +14,6 @@ urlpatterns = [ path('',views.Home),
                 path('api-auth/', include('rest_framework.urls')),
                 path('Match_Signature/',views.Match_Signature),
                 path('Add_Signature/',views.Add_Signature),
+                path('Get_Signature/',views.Get_Signature),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

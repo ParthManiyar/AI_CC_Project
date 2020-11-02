@@ -161,3 +161,31 @@ class Add_SignatureAPI(APIView):
 
         return Response(data=response)
 Add_Signature = Add_SignatureAPI.as_view()
+
+class Get_SignatureAPI(APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,BasicAuthentication)
+    def post(self,request,*args,**kwargs):
+        response = {}
+        response['status']=500
+        try:
+            data = request.data
+            if(Slip.objects.filter(Account_Number=data['Account_Number']).exists()):
+                response['status']=200
+                sp = Slip.objects.get(Account_Number=data['Account_Number'])
+                response['Account_Number']=sp.Account_Number
+                response['signature']=sp.Image_Path.url
+            else:
+                response['status']=404
+                response['Account_Number']=data['Account_Number']
+
+        except Exception as e:
+            error()
+            print("ERROR IN = Get_SignatureAPI", str(e))
+
+        return Response(data=response)
+        
+Get_Signature = Get_SignatureAPI.as_view()
+        
+
+
+
