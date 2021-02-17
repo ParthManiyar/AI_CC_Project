@@ -31,6 +31,6 @@ Our idea is to extract the previously stored signature from the system using the
 
 
 ![AI-Model (CNN with SPP)](AI_CC_Presentation.png "AI-Model")
-![AI-Model (CNN with SPP)](AI_CC_Presentation (1).png "AI-Model")
-![AI-Model (CNN with SPP)](AI_CC_Presentation (2).png "AI-Model")
-![AI-Model (CNN with SPP)](AI_CC_Presentation (3).png "AI-Model")
+![architecture (CNN with SPP)](architecture.png "architecture")
+![seqeuence_diagram (CNN with SPP)](seqeuence_diagram.png "seqeuence_diagram")
+![flow_chart (CNN with SPP)](flow_chart.png "AI-Model")
