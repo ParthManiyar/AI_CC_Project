@@ -29,5 +29,8 @@ Our idea is to extract the previously stored signature from the system using the
 11. SQLite3 : Database Management System
 12. Django Rest Framework: To Make Rest API
 
-# AI-Model (CNN with SPP)
 
+![AI-Model (CNN with SPP)](AI_CC_Presentation.png "AI-Model")
+![AI-Model (CNN with SPP)](AI_CC_Presentation (1).png "AI-Model")
+![AI-Model (CNN with SPP)](AI_CC_Presentation (2).png "AI-Model")
+![AI-Model (CNN with SPP)](AI_CC_Presentation (3).png "AI-Model")
